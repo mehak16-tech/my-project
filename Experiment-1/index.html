@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+
+<body>
+    <div>
+        <form action="/submit" method="post">
+
+            <h1>Student Registration Form</h1>
+
+            <h3>NAME <br><br> <input type="text" name="Name" placeholder="Enter your Full name" required minlength="2"  maxlength="20">
+            </h3>
+
+            <h3>EMAIL <br><br> <input type="email" name="email" placeholder="example@gmail.com" required pattern="example@gmail.com"></h3>
+
+            <h3>AGE <br><br> <input type="number" name="AGE" placeholder="Enter your age" required min="1"></h3>
+            <br>
+            <input type="submit" name="submit" value="Register">
+
+            <input type="reset" value="reset">
+        </form>
+    </div>
+</body>
+
+</html>
