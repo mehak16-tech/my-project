@@ -1,0 +1,51 @@
+.outer-container {
+    border: 2px solid black;
+    background-color: rgb(205, 204, 204);
+    width: 500px;
+    height: 500px;
+    padding: 30px;
+}
+    
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.inner-container
+{
+    background-color: whitesmoke;
+    width: 400px;
+    height: 400px;
+    margin: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.balance
+{
+    padding: 40px;
+    margin: 30px;
+}
+
+.deposit
+{
+    background-color: rgb(11, 155, 11);
+    color: white;
+    border-radius: 4px;
+    width: 300px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.withdraw
+{
+    background-color: rgb(161, 26, 26);
+    color: white;
+    border-radius: 4px;
+    width: 300px;
+    padding: 10px;
+    margin: 5px;
+}
