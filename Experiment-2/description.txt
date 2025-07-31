@@ -1,0 +1,14 @@
+HTML----->
+1. Made a basic banking ui layout using html and css.
+2. Balance at the top using balance class.
+3. btn class--- withdraw and deposit button.
+4. and It is all is wrapped inside the div class outer-container.
+
+
+CSS---->
+1.div class outer-container is alligned at the center of the page.
+2. A light grey outer box surrounded by a white inner container.
+3. At the top, balance $0 is shown i green color.
+4. below the balance, there are two large buttons--1. green for "deposit" 2. red for "withdraw".
+5. buttons are styled with padding,rounded corners and no borders to the button.
+6. overall design is simple,easy to understand.

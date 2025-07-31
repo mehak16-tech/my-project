@@ -26,8 +26,10 @@ body {
 
 .balance
 {
-    padding: 40px;
-    margin: 30px;
+    padding: 20px;
+    margin: 20px;
+    color: green;
+    font-size: 32px;
 }
 
 .deposit
@@ -36,8 +38,10 @@ body {
     color: white;
     border-radius: 4px;
     width: 300px;
-    padding: 10px;
+    padding: 12px;
     margin: 5px;
+    border: none;
+    font-size: 16px;
 }
 
 .withdraw
@@ -48,4 +52,6 @@ body {
     width: 300px;
     padding: 10px;
     margin: 5px;
+    border: none;
+    font-size: 16px;
 }
