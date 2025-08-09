@@ -1,0 +1,163 @@
+ADMIN DASHBOARD TEST CASES, CSS STYLING, & PROPERTY EXPLANATION
+
+1. STRUCTURE & FUNCTIONALITY
+The Admin Dashboard has 4 main sections:
+
+1. Header – Shows the dashboard title and a label to toggle dark theme.
+2. Navigation Menu – Vertical list with links to Home, Users, and Settings.
+3. Main Content Area – Displays a welcome message for the admin and placeholder text for where charts, tables, or reports can go.
+4. Footer – Shows ©2025 Admin Panel at the bottom.
+
+A hidden checkbox (#toggle) is used to switch between normal mode and dark mode. When checked, CSS variables change the colors of the header, footer, nav, and main content.
+
+2. ELEMENTS & PURPOSE
+- <input type="checkbox" id="toggle">  
+  Hidden checkbox that triggers theme color changes using CSS variables.
+
+- <header>  
+  Uses flexbox to arrange the page title and dark mode label side by side.
+
+- <nav>  
+  Vertical menu with links. Each list item has space below it for readability.
+
+- <main>  
+  Main content area with padding and left-aligned text.
+
+- <footer>  
+  Spans across the bottom of the dashboard, with centered white text.
+
+3. TEST CASES: Dark Theme Toggle
+FIELD: Dark Theme Toggle
+Requirement: Clicking the "Dark Theme" label should toggle between light mode and dark mode styles via CSS variables.
+
+VALID ACTIONS:
+1. Default Light Mode:
+   - Page loads with green header/footer, light gray nav, white main background, black main text.
+2. Dark Mode Activated:
+   - Click "Dark Theme" once → colors switch to gray header/footer, dark gray nav, black main background, white main text.
+3. Toggle Back to Light Mode:
+   - Click again → returns to default colors.
+
+INVALID / UNEXPECTED CASES:
+1. Checkbox Hidden in UI:
+   - Users cannot directly click the checkbox; must use the label.
+   - Verify label is correctly linked with for="toggle".
+2. Partial Theme Switch:
+   - If any element does not change color when toggled, it’s a failure.
+3. Theme State Persistence:
+   - Without JavaScript, the theme resets to light mode on page reload.
+
+4. CSS STYLING BREAKDOWN WITH EXPLANATIONS
+
+CSS Variables (:root)
+:root {
+    --bg-color-header: rgb(43, 168, 43);  /* header background */
+    --bg-color-footer: rgb(45, 174, 45);  /* footer background */
+    --bg-color-nav: rgb(214, 214, 214);   /* navigation background */
+    --bg-color-main: white;               /* main content background */
+    --color-main: black;                  /* main text color */
+}
+Purpose: Store reusable colors for easy theme switching.
+Why: Instead of hardcoding colors everywhere, variables allow quick global changes.
+
+Header
+header {
+    color: white;
+    border: 1px solid black;
+    grid-column: 1/span 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: var(--bg-color-header);
+}
+Purpose: Display title & dark mode label neatly at top.
+Why: Flexbox allows easy side-by-side arrangement; grid-column makes it stretch full width.
+
+Main
+main {
+    background-color: var(--bg-color-main);
+    color: var(--color-main);
+    border: 1px solid;
+    text-align: start;
+    padding: 10px;
+}
+Purpose: Content area with readable spacing.
+Why: Variables make colors theme-dependent; padding keeps text away from edges.
+
+Navigation
+nav {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: var(--bg-color-nav);
+    padding-left: 20px;
+    padding-top: 20px;
+}
+nav li {
+    margin-bottom: 8px;
+}
+Purpose: Vertical menu with clear separation between links.
+Why: Column layout stacks items; padding improves readability.
+
+Footer
+footer {
+    color: white;
+    border: 1px solid black;
+    grid-column: 1/span 2;
+    padding: 20px;
+    background-color: var(--bg-color-footer);
+    text-align: center;
+}
+Purpose: Bottom bar across the page.
+Why: Grid-column makes it full width; padding & centered text improve look.
+
+Dashboard Layout
+.dashboard {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 80px auto 70px;
+    height: 100vh;
+}
+Purpose: Page layout using CSS Grid.
+Why: First column fixed at 200px; second column takes remaining space.
+
+Dark Theme Toggle
+#toggle {
+    display: none;
+}
+input:checked ~ .dashboard {
+    --bg-color-header: gray;
+    --bg-color-footer: gray;
+    --bg-color-nav: rgb(181, 181, 181);
+    --bg-color-main: black;
+    --color-main: white;
+}
+Purpose: Change theme colors when checkbox is checked.
+Why: Uses CSS variables to instantly update all themed areas without JavaScript.
+
+
+GRID LAYOUT EXPLANATION
+The dashboard uses CSS Grid to position header, navigation, main content, and footer.
+
+Grid Setup:
+.dashboard {
+    display: grid; /* Enables grid layout */
+    grid-template-columns: 200px 1fr; /* Two columns: navigation is fixed at 200px, main content takes the rest */
+    grid-template-rows: 80px auto 70px; /* Three rows: header (80px), main content (auto height), footer (70px) */
+    height: 100vh; /* Full viewport height */
+}
+
+How It Works:
+- The header is placed in the first row and spans both columns using grid-column: 1 / span 2.
+- The navigation is placed in the first column of the second row.
+- The main content is placed in the second column of the second row.
+- The footer is placed in the third row and spans both columns.
+- Using fixed sizes for header, footer, and navigation ensures consistent layout, while the main content expands to fill available space.
+
+5. LEARNING OUTCOMES
+1. How to design a responsive admin dashboard layout using CSS Grid and Flexbox.
+2. How to use CSS variables for dynamic theme colors.
+3. How to implement a dark theme toggle without JavaScript.
+4. How to structure a page with semantic HTML (header, nav, main, footer).
+
