@@ -1,0 +1,108 @@
+PROJECT: Product List with Category Filter
+
+1. HTML STRUCTURE (Step by Step)
+Step 1: Create a container <div class="container">.
+        - This box holds everything: heading, dropdown, and product list.
+
+Step 2: Add a heading <h2>Product List</h2>.
+        - Just a title for the page.
+
+Step 3: Create a dropdown <select id="category">.
+        - This dropdown lets the user choose which category to see.
+        - Options are: All, Clothing, Electronics, Books.
+        - Each option has a "value" (example: value="Books").
+
+Step 4: Create the product list <div id="product-list">.
+        - Inside this, add many <div class="product"> items.
+        - Each product has a data-category attribute showing which category it belongs to.
+          Example: <div class="product" data-category="Clothing">T-Shirt</div>
+        - This "data-category" is very important because JavaScript will use it for filtering.
+
+2. CSS STYLING (Step by Step)
+Step 1: Style the body
+        - Use Arial font and add some padding around the page.
+
+Step 2: Style the container (.container)
+        - Give it a border, padding, and rounded corners.
+        - Set a max-width (400px) so it doesn’t stretch too wide.
+        - This makes it look like a neat card.
+
+Step 3: Style the heading (h2)
+        - Add margin-bottom so there’s space below the title.
+
+Step 4: Style the dropdown (select)
+        - Full width so it stretches across the container.
+        - Padding for easy clicking.
+
+Step 5: Style the products (.product)
+        - Add border, margin, padding, and rounded corners.
+        - This makes each product look separate and easy to read.
+
+3. JAVASCRIPT FUNCTIONALITY (Step by Step with WHY)
+Step 1: Select important elements
+        const dropdown = document.getElementById("category");
+        const products = document.querySelectorAll(".product");
+
+        - WHY? Because we need to "connect" our JS with the HTML.
+        - dropdown → lets us detect which category user selects.
+        - products → gives us all product items, so we can hide/show them.
+
+Step 2: Add event listener to the dropdown
+        dropdown.addEventListener("change", function() {
+
+        - WHY? We want something to happen *when the user changes the category*.
+        - "change" event triggers every time a different option is selected.
+
+Step 3: Get the selected value
+        const selected = this.value;
+
+        - WHY? Because we must know which category was chosen.
+        - Example: if user picks "Books", selected = "Books".
+        - This value will be used to decide which products to display.
+
+Step 4: Loop through each product
+        products.forEach(product => {
+          if (selected === "All" || product.dataset.category === selected) {
+            product.style.display = "block";   // show product
+          } else {
+            product.style.display = "none";    // hide product
+          }
+        });
+
+        - WHY use forEach? Because we need to check *every product* one by one.
+        - WHY check product.dataset.category?
+          → Each product has a "data-category" attribute (like Clothing, Books).
+          → We compare it with the selected category.
+        - WHY use style.display?
+          → "block" makes the element visible.
+          → "none" hides the element.
+        - So basically: Only products that belong to the selected category remain visible.
+
+Step 5: Close the event listener
+        });
+
+        - WHY? To finish the code block. Now the filter is complete.
+
+Key Idea:
+- The whole logic is based on reading the dropdown value and comparing it with each product's "data-category".
+- This way, we don’t hardcode anything in JS. If new products or categories are added in HTML, the same code still works.
+
+4. USER EXPERIENCE (Step by Step)
+Step 1: When the page first loads, all products are visible.
+Step 2: The user opens the dropdown and picks a category.
+Step 3: JavaScript checks which option is selected.
+Step 4: Only the matching products remain visible, others disappear.
+Step 5: If the user chooses "All", everything is shown again.
+
+Example:
+- If user selects "Electronics":
+  → Only Headphones and Smartphone are displayed.
+- If user selects "Books":
+  → Only Novel and Cookbook are displayed.
+
+5. LEARNING OUTCOMES
+1. Learned how to connect HTML, CSS, and JavaScript together.
+2. Learned how to use dropdown menus to filter content.
+3. Understood how to use data- attributes in HTML.
+4. Learned why event listeners ("change") are useful in interactive pages.
+5. Learned how to show or hide elements dynamically with style.display.

@@ -1,0 +1,24 @@
+ body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .container {
+      border: 1px solid #333;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 400px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    select {
+      padding: 10px;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    .product {
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      padding: 8px;
+      border-radius: 5px;
+    }
