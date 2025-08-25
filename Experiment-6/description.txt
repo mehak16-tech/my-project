@@ -1,0 +1,78 @@
+PROJECT: SVG Drawing Tool
+
+1. HTML STRUCTURE (Actions I Did)
+
+1.	 I created a <main class="wrap"> as the main container for everything.
+2.	 I added a heading <h2>SVG Drawing Tool</h2> to give the project a title.
+3.	 I created a toolbar <div class="toolbar"> with two buttons:
+  → The first button has id="drawModeBtn" and is set active by default.
+  → The second button has id="clearBtn" to clear all drawings.
+4.	 I created a <div class="canvas-frame"> to hold the drawing area.
+5.	 Inside it, I placed an <svg id="drawingArea" width="900" height="520"></svg> which is the actual canvas.
+6.	 Finally, I added a <p class="hint"> with instructions for the user on how to draw.
+
+2. CSS STYLING (Actions I Did)
+
+1.	 I defined CSS variables (\:root) for background, ink, frame, canvas, and stroke colors.
+2.	 I styled the body with background color, text color, font, and removed default margins.
+3.	 I styled the .wrap container with padding, border, rounded corners, and shadow to make it look like a card.
+4.	 I styled the heading <h2> with bottom margin.
+5.	 I styled the .toolbar with flexbox layout and space between buttons.
+6.	 I styled the buttons with padding, border, rounded corners, background color, and cursor pointer. The active button has blue background with white text.
+7.	 I styled the .canvas-frame with border, rounded corners, background white, and padding.
+8.	 I styled the SVG drawing area (#drawingArea) with full width, fixed height, background color, border, rounded corners, and crosshair cursor.
+9.	 I styled the .hint paragraph with smaller font size and gray color.
+
+
+3. JAVASCRIPT FUNCTIONALITY (Actions I Did)
+
+1.	 I selected the SVG element with getElementById("drawingArea").
+2.	 I created two variables: isDrawing (to track if the user is drawing) and currentPath (to store the active stroke).
+3.	 I wrote a helper function getSvgPoint(evt):
+  → It creates an SVGPoint, reads either mouse or touch coordinates, and converts them into SVG coordinates using matrixTransform.
+
+4.	 I wrote startDraw(evt):
+  → Prevents default touch behavior.
+  → Sets isDrawing = true.
+  → Gets the starting point inside the SVG.
+  → Creates a new <path> element with blue stroke, width 2.5, rounded ends and joins, no fill.
+  → Sets the path’s “d” attribute to start at the mouse/touch point (M x y).
+  → Appends this path inside the SVG.
+
+5.	 I wrote draw(evt):
+  → Checks if drawing is active and a path exists.
+  → Gets the new point from getSvgPoint.
+  → Extends the “d” attribute of the current path with a line to the new point (L x y).
+6.	 I wrote endDraw():
+  → Sets isDrawing = false and clears currentPath so the stroke stops.
+
+7.	 I added an event listener to the Clear button:
+  → On click, it clears all paths inside the SVG by setting svg.innerHTML = "".
+
+8.	 I added mouse event listeners:
+  → mousedown starts drawing.
+  → mousemove continues drawing.
+  → mouseup and mouseleave end drawing.
+
+9.	 I added touch event listeners:
+  → touchstart starts drawing.
+  → touchmove continues drawing.
+  → touchend ends drawing.
+  → passive: false is used to allow preventDefault on touch events.
+
+4. USER EXPERIENCE (What Happens When Using It)
+
+1.	 When the page opens, the drawing area is empty.
+2.	 If the user presses the mouse or finger inside the SVG, a new stroke begins.
+3.	 As the user moves, the path is extended, creating freehand lines.
+4.	 Releasing the mouse or lifting the finger ends the stroke.
+5.	 Clicking “Clear All” removes everything inside the SVG and resets the canvas.
+
+LEARNING OUTCOMES
+
+1.	Learned how to use HTML <svg> as a canvas for freehand drawing.
+2.	Learned how to apply CSS styling to make a simple tool look clean and user-friendly.
+3.	Learned how to use JavaScript to create and update SVG <path> elements dynamically.
+4.	Learned how to handle mouse and touch events to support both desktop and mobile drawing.
+5.	Learned how to clear the canvas by removing all child elements inside the SVG.
+6.	Learned how to connect HTML, CSS, and JavaScript together to build an interactive tool.
