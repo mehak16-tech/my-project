@@ -1,31 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import ProductCard from './components/ProductCard.jsx';
+import React from "react";
+// import Header from "./components/Header";
+import ProductCard from "./components/ProductCard";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const product = {
-    name: "sample Product",
-    price: 29.99,
-    inStock: true
-  }
+  const [theme, setTheme] = React.useState("light-theme");
 
-  const product1 = {
-    name: "sample Product",
-    price: 29.99,
-    inStock: true
-  }
+  React.useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light-theme" ? "dark-theme" : "light-theme"));
+  };
+
+  const products = [
+    {
+      name: "Wireless Mouse",
+      price: 25.99,
+      inStock: true,
+    },
+    {
+      name: "Keyboard",
+      price: 45.5,
+      inStock: false,
+    },
+    {
+      name: "Monitor",
+      price: 199.99,
+      inStock: true,
+    },
+  ];
 
   return (
     <>
-      <h1>MEHAK</h1>
-      <ProductCard  props={product} />
-       <ProductCard  props={product1} />
-
+      <h2 id="header">Products List</h2>
+      <button onClick={toggleTheme}>
+        Switch to {theme === "light-theme" ? "Dark" : "Light"} Mode
+      </button>
+      <div className="products-container">
+        {products.map((product) => (
+          <ProductCard props={product} />
+        ))}
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
