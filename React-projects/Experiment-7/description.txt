@@ -1,0 +1,91 @@
+PRODUCT LIST WITH THEME TOGGLE
+
+1. COMPONENT: ProductCard
+Purpose:
+This is a reusable component that takes a product’s details as props and displays them in a card format. It makes the application modular, so instead of writing code repeatedly for every product, I just use this component.
+
+Fields handled in ProductCard:
+- Name: Rendered in bold to highlight the product title.
+- Price: Displays the value with a dollar sign. It directly comes from the price property in the product object.
+- Status: Checks if the product is available. If inStock is true, it shows “In Stock”. If it is false, it shows “Out of Stock”.
+
+Example Behaviors:
+- Input → { name: "Wireless Mouse", price: 25.99, inStock: true }
+  Output on card → Wireless Mouse, Price: $25.99, Status: In Stock
+- Input → { name: "Keyboard", price: 45.5, inStock: false }
+  Output on card → Keyboard, Price: $45.50, Status: Out of Stock
+
+Edge Cases:
+- If name is missing, the card might render blank text.
+- If price is not a number, it could still print but incorrectly formatted.
+- If inStock is not a boolean, status could display unexpected text.
+
+2. COMPONENT: App
+Purpose:
+The main component of the project. It manages the overall page structure, the theme switching functionality, and the display of multiple products.
+
+Theme Toggle:
+- A state variable theme is used with React’s useState. Default is "light-theme".
+- useEffect is used to apply the chosen theme to the body tag whenever it changes.
+- A button is provided that toggles between Light Mode and Dark Mode.
+  - If currently light → button shows “Switch to Dark Mode”.
+  - If currently dark → button shows “Switch to Light Mode”.
+
+Products Array:
+The data is stored as an array of objects. Each product object has:
+- name (string)
+- price (number)
+- inStock (boolean)
+
+Example Data in the App:
+1. Wireless Mouse → $25.99 → In Stock
+2. Keyboard → $45.50 → Out of Stock
+3. Monitor → $199.99 → In Stock
+
+Rendering Products:
+- The array is looped through using map.
+- For each product, a ProductCard is generated.
+- This shows how props can be passed down to child components efficiently.
+
+3. CSS STYLING OVERVIEW
+
+Theme Colors:
+- Light Theme:
+  Background: White
+  Text: Dark Blue/Gray
+  Card Background: Light Gray
+- Dark Theme:
+  Background: Dark Gray/Black
+  Text: White (slightly transparent white for smoothness)
+  Card Background: Almost black
+
+Page Layout (Body):
+- Entire page is centered using Flexbox.
+- Uses a modern, system-style font for readability.
+- Minimum width and height set so layout doesn’t break.
+
+Header (#header):
+- Title is centered.
+- Larger font size and bold style.
+- Space below it separates it from the product list.
+
+Products Container (.products-container):
+- Displays products side by side using flexbox.
+- Gap of 20px keeps cards separate.
+- Border, padding, and rounded corners make it look neat.
+
+Product Card (.product-card):
+- Each card has its own background based on the theme.
+- Rounded corners and drop shadow for modern design.
+- Content is vertically centered.
+- Fixed width and height to keep all cards uniform.
+- Bold product name stands out.
+
+4. LEARNING OUTCOMES
+1. Understood how to structure a React project with multiple components.
+2. Learned how to pass props into a child component.
+3. Practiced using React hooks (useState, useEffect).
+4. Implemented a light and dark theme system with CSS variables.
+5. Improved knowledge of Flexbox for layout design.
+6. Learned how to create a reusable card design for displaying data.
+7. Understood how mapping an array in React can dynamically render multiple items.
