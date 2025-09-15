@@ -1,0 +1,85 @@
+LIBRARY MANAGEMENT APP 
+
+1. FIELD: Search
+Requirement: Optional (can be empty). When text is entered, it should filter through both book titles and authors.
+
+VALID INPUTS:
+"1984" → should display only 1984 by George Orwell
+"Harper" → should display To Kill a Mockingbird by Harper Lee
+"the" → should match The Great Gatsby (case-insensitive)
+INVALID INPUTS:
+"xyz" → no match found, app should display "No books found."
+Special characters like "#$@" → no match found, same message displayed.
+
+2. FIELD: Add New Book (Title and Author)
+Requirement: Both fields are required before adding a book. Extra spaces should be ignored (trimmed).
+
+VALID INPUTS:
+Title: "Atomic Habits", Author: "James Clear" → adds the book to the list.
+Title: " Clean Code ", Author: " Robert Martin " → still adds correctly because spaces are trimmed.
+
+INVALID INPUTS
+Title empty, Author filled → book should not be added.
+Author empty, Title filled → book should not be added.
+Both fields empty → no action taken.
+
+3. FIELD: Remove Book
+Requirement: User should be able to remove any book by pressing the "Remove" button.
+
+TEST CASES:
+Click remove on 1984 → it disappears from the list.
+Remove all books → list becomes empty, shows "No books found."
+
+FORM SUBMISSION (Overall App Behavior):
+When inputs are valid and add button is clicked → new book appears in the list.
+When invalid → nothing should change in the list.
+Removing works instantly without page refresh.
+
+--->CSS STYLING BREAKDOWN
+
+1. ELEMENT: body (Page Background)
+Purpose: Creates a dark theme look.
+background-color: #1e1e1e; → dark gray background.
+color: white; → all text is white by default.
+Flexbox properties used to center the app both vertically and horizontally.
+
+2. ELEMENT: .library-card (Main Container)
+Purpose: Central wrapper for the app.
+width: 70%; max-width: 600px; → keeps it neat on both large and small screens.
+text-align: center; → aligns header and form elements in the middle.
+
+3. ELEMENT: .library-header (App Title)
+Purpose: Styles the heading.
+font-size: 2.5rem; → makes the title bold and large.
+White text stands out aginst dark background.
+
+4. ELEMENTS: .library-search, .library-form
+Purpose: Adds spacing between sections.
+margin-bottom: 18px; → keeps elements from sticking together.
+
+5. ELEMENT: input fields (.search-input, .form-input)
+Purpose: Styles search and add book inputs.
+Dark background (#333) with light borders.
+White text so it matches theme.
+
+6. ELEMENT: .add-btn, .remove-btn (Buttons)
+Purpose: Action buttons for adding/removing books.
+Black background, white text.
+Rounded corners with hover effect (background-color: #444).
+
+7. ELEMENT: .book-item (Each Book in List)
+Purpose: Displays book with title, author, and remove button.
+Flexbox used for spacing between text and button.
+Dark gray background with border and padding.
+
+8. ELEMENT: .empty-msg
+Purpose: Message when no books are found.
+Styled with lighter gray text (#bbb) to differentiate from regular content.
+
+--->LEARNING OUTCOMES
+
+1.Learnt how to build a small library management system using React.
+2.Understood how to use state (useState hook) to manage lists, inputs, and filtering.
+3.Practiced implementing form validations like required fields and trimming.
+4.Gained experience in dynamic search filtering and conditional rendering in React.
+5.Improved CSS skills by designing a dark theme UI with proper spacing and hover effects.
