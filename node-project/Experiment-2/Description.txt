@@ -1,0 +1,40 @@
+Learning Outcomes:
+a) I learned how to use Flexbox to center content both vertically and horizontally on the screen.
+b) I understood how CSS styling like padding, shadows, and border-radius can improve UI design.
+c) I practiced creating a clean and structured HTML layout for better readability and future updates.
+d) I also learned how to give a professional look to a simple project using only basic frontend tools (HTML & CSS).
+
+Snippets:
+a) Flexbox Centering : Used to center the whole layout in the middle of the screen.
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+b) Buttons Layout : Keeps the buttons vertically aligned with space between them.
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+c) Deposit Button Styling : Green button used for deposit action.
+.deposit {
+  background-color: #28a745;
+}
+
+d) Withdraw Button Styling : Red button used for withdraw action.
+.withdraw {
+  background-color: #dc3545;
+}
+
+e) Button Base Style : Makes all buttons smooth, clickable, and modern-looking.
+button {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+f) Connecting CSS File : Links the external CSS file to the HTML page.
+<link rel="stylesheet" href="style.css">
