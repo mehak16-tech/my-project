@@ -1,0 +1,64 @@
+CARD MANAGEMENT API
+
+--->FIELD: Suit
+Requirement: This field is required when adding a new card. It cannot be left empty or skipped. The suit describes the type of card, such as Hearts, Spades, Diamonds, or Clubs.
+VALID INPUTS:
+"Hearts" – Card is successfully created and stored.
+"Spades" – Accepted and added to the collection.
+"Clubs" – Works fine.
+INVALID INPUTS:
+Empty input – The system responds with an error message that suit and value are required.
+Missing field – If the request body does not include a suit, the API rejects it with a bad request response.
+
+--->FIELD: Value
+Requirement: The value field is also mandatory while adding a new card. It represents the rank of the card like Ace, King, Queen, Jack, or numbers.
+VALID INPUTS:
+"Ace" – Card is created successfully.
+"Queen" – Accepted as valid.
+"10" – Also valid, since values are stored as text.
+INVALID INPUTS:
+Empty input – The API does not allow blank values.
+Missing value field – The request fails and an error response is returned.
+
+--->API ENDPOINTS & TEST CASES
+
+1.GET /cards
+
+Used to retrieve the complete list of cards currently stored.
+Returns all cards in an organized JSON format.
+Practical Case: If no new cards are added, it shows the three default cards provided at the start.
+
+2.GET /cards/:id
+
+Fetches a single card by its unique ID.
+Valid Case: Entering a valid ID returns the details of that card.
+Invalid Case: Entering an ID that does not exist shows a "Card not found" message with a 404 error.
+
+3.OST /cards
+
+Used to add a new card by providing both suit and value in the request body.
+Valid Case: If both fields are provided, a new card is added with a new unique ID.
+Invalid Case: If either suit or value is missing or empty, the system shows an error and does not add the card.
+
+4.DELETE /cards/:id
+
+Removes an existing card by its ID.
+Valid Case: If the ID exists, the card is removed successfully and the system confirms with a success message.
+Invalid Case: If the ID does not exist, the API shows an error message saying the card was not found.
+
+5.SERVER CONFIGURATION
+
+1.The server is hosted locally and runs on port 3000.
+2.The JSON responses are neatly formatted with spaces for readability.
+3.A counter variable is used to assign unique IDs to each new card so there is no duplication.
+4.The system starts with three preloaded cards: Ace of Hearts, King of Spades, and Queen of Diamonds.
+
+--->LEARNING OUTCOMES
+
+1.Learned how to create and structure a basic REST API using Node.js and Express.
+2.Understood the importance of validations to ensure required fields are not left empty.
+3.Practiced handling different HTTP methods for different operations: GET for retrieving, POST for adding, and DELETE for removing.
+4.Gained experience with route parameters and how to fetch data using IDs.
+5.Learned the use of proper HTTP status codes such as 201 for created, 400 for bad requests, and 404 for not found.
+6.Improved testing skills by trying practical cases with valid and invalid inputs.
+7.Understood how to use an in-memory data structure (array) to simulate database-like behavior.

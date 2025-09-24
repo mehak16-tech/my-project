@@ -1,0 +1,78 @@
+TICKET BOOKING API 
+
+--->FIELD: Seat ID
+Requirement: Seat ID must exist in the system (from 1 to 8). Any request with an invalid or non-existing seat ID should be rejected.
+VALID INPUTS:
+"1" → Seat is found and can be locked or booked.
+"5" → Works correctly.
+INVALID INPUTS:
+"10" → Returns error saying seat not found.
+"abc" → Invalid seat, also rejected.
+
+--->FIELD: Locking a Seat
+Requirement: A seat can only be locked if it is available. Once locked, it cannot be booked by others until the lock is confirmed or expires. Each lock lasts for 1 minute (60 seconds).
+VALID CASES:
+Seat is available → Lock is created successfully, with a message to confirm within 1 minute.
+INVALID CASES:
+Seat already booked → API rejects with error saying seat is already booked.
+Seat already locked by someone else within 1 minute → API rejects with error saying seat is currently locked.
+
+--->FIELD: Confirming a Seat
+Requirement: Only locked seats can be confirmed. A seat must be confirmed within 1 minute, otherwise the lock will expire and the seat becomes available again.
+VALID CASES:
+Seat locked within time → Successfully confirmed and booked.
+INVALID CASES:
+Seat not locked → API rejects with error saying seat cannot be booked.
+Seat lock expired (after 1 minute) → Seat returns to available, user must lock again before booking.
+
+--->API ENDPOINTS & PRACTICAL TEST CASES
+
+1.GET /seats
+
+Purpose: Check the status of all seats.
+Expected: Shows all seats with their current status (available, locked, booked).
+Practical Test: After server start, all seats should display as "available".
+
+2.POST /lock/:seatId
+
+Purpose: Temporarily lock a seat before booking.
+Valid Test: Lock seat 1 → Response confirms seat 1 is locked successfully for 1 minute.
+Invalid Test: Try locking seat 1 again within 1 minute → Error message saying seat is currently locked.
+
+3.POST /confirm/:seatId
+
+Purpose: Confirm and finalize the booking of a seat.
+Valid Test: Lock seat 2, then confirm within 1 minute → Response says "Seat 2 booked successfully".
+Invalid Test: Try confirming a seat without locking first → Error saying seat is not locked.
+Invalid Test: Wait more than 1 minute before confirming → Error saying lock has expired.
+
+--->SERVER CONFIGURATION
+
+Server runs on http://localhost:3000
+
+All seat states are stored in memory using an object (seats).
+Each seat can have three statuses:
+Available → free to lock and book.
+Locked → temporarily held by a user for up to 1 minute.
+Booked → permanently reserved.
+
+A timeout system automatically changes locked seats back to available if they are not confirmed within the given time.
+Console logs provide details about when a seat is locked, confirmed, or when a lock expires.
+
+--->PRACTICAL USAGE FLOW
+
+Start the server and check /seats → all seats should show "available".
+Choose a seat and send a POST request to /lock/:seatId → seat gets locked for 1 minute.
+Within 1 minute, send a POST request to /confirm/:seatId → seat becomes "booked".
+If no confirmation is made within 1 minute, seat automatically resets to "available".
+Booked seats cannot be locked or booked again.
+
+--->LEARNING OUTCOMES
+
+Learned how to implement a real-time seat booking system using Express.
+Understood the concept of temporary locks and how to manage timeouts in APIs.
+Gained experience in handling multiple seat states (available, locked, booked).
+Practiced using POST requests with route parameters for locking and confirming seats.
+Learned howto handle error cases clearly (seat not found, already booked, lock expired).
+Improved logical thinking by designing a 1-minute lock mechanism that mimics real-world ticket booking apps.
+Understood the importance of server-side validation to prevent invalid bookings.
