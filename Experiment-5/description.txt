@@ -1,0 +1,78 @@
+PROJECT: Dynamic Product Filter
+1) Technologies Used:
+  a) HTML5 (Structure of product list and filter dropdown.)
+  b) CSS3 (Styling of container, dropdown, and product items.)
+  c) JavaScript (Filtering functionality (show/hide products dynamically)).
+
+2) Project Overview:
+  a) This project is a Dynamic Product Filtering System where the user selects a category (Clothing, Electronics, Books, etc.) from a dropdown menu, and the displayed product list automatically updates.
+  b) The main goal is to practice DOM manipulation using data attributes for filtering.
+  c) Such a feature is very useful in e-commerce websites like Amazon or Flipkart where users filter products by category.
+
+3) Structure:
+  a) Dropdown Menu (Filter Control):
+    i) A simple <select> element with category options.
+   ii) Connected to JavaScript to trigger filtering whenever the user changes the category.
+      SNIPPET:  
+        <select id="filter">
+            <option value="all">All</option>
+            <option value="clothing">Clothing</option>
+            <option value="electronics">Electronics</option>
+            <option value="books">Books</option>
+        </select>
+
+  b) Product List (Grid of Items):
+    i) Each product is wrapped inside a card with a data-category attribute.
+   ii) This helps JS identify the category of each product.
+       SNIPPET:
+          <div class="product" data-category="clothing">T-Shirt</div>
+          <div class="product" data-category="electronics">Laptop</div>
+          <div class="product" data-category="books">JavaScript Guide</div>
+
+
+            
+  C) JavaScript Filtering Functionality: 
+    i) Captures selected category from dropdown.
+   ii) Loops through all products and hides those that don’t match.
+  iii) If "all" is selected → shows all products.
+       SNIPPET:
+          document.getElementById("filter").addEventListener("change", function() {
+                let category = this.value;
+                let products = document.querySelectorAll(".product");
+             products.forEach(product => {
+              if (category === "all" || product.dataset.category === category) {
+                product.style.display = "block";
+              } else {
+                product.style.display = "none";
+                }
+             });
+            });
+
+
+  d) CSS Styling:
+    i) Products styled as cards in a grid layout.
+   ii) Dropdown styled with padding and hover effects.
+  iii) Cards have shadows and spacing for a modern look.
+       SNIPPET:
+          .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            text-align: center;
+           }
+
+4) Learning Outcomes
+  a) Learned how to use data attributes in HTML for categorization.
+  b) Understood real-time DOM manipulation with JavaScript.
+  c) Practiced implementing event listeners (change event for dropdown).
+  d) Improved CSS skills by designing grid layouts for product display.
+  e) Learned a real-world concept that directly connects to e-commerce sites.
+
+5) Key Concepts
+  a) DOM Selection & Manipulation
+  b) Data Attributes (data-category)
+  c) Dropdown Event Handling (change event)
+  d) Dynamic Show/Hide using style.display
+  e) Responsive CSS Card Design

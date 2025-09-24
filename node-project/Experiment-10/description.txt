@@ -1,0 +1,85 @@
+PROJECT: CLI Employee Management System
+
+1) Technologies Used:
+    a) Node.js: As the runtime environment for executing the command-line application.
+    b) Node.js readline Module: For creating an interactive command-line interface to handle user input and output.
+    c) JavaScript (ES6+): For the application's logic, data storage, and control flow.
+
+
+2) Project Overview:
+    a) This project is a command-line interface (CLI) application for managing a list of employees.
+    b) It demonstrates how to build an interactive terminal application, handle user input sequentially, and perform data manipulations on an in-memory array.
+    c) The primary goal was to practice core Node.js concepts, including its built-in modules and asynchronous callback patterns, without relying on external databases or frameworks.
+    d) This application serves as a solid introduction to building interactive scripts and tools with Node.js.
+
+
+3) Project File Structure: The project is self-contained within a single file, which includes the logic for user interaction, data storage, and the main application loop.
+
+        Experiment-10/
+        ├── node_modules/         # Not required as no external packages are used
+        ├── package.json          # Project metadata
+        └── app.js                # The main application file with all the code
+
+4) Structure: 
+    Application Loop & In-Memory Data:
+     The application's state is managed by a simple JavaScript array (employees). A central displayMenu function acts as the main loop, prompting the user for input and calling other functions based on their choice.
+
+     SNIPPETS:
+
+        i) In-Memory Data Store: The state is managed by a simple array of employee objects. This array is the single source of truth and is modified directly by the application's functions.
+            let employees = [];
+
+        ii) The Main Menu (displayMenu): This is the core of the application's interactive loop. It prints the options and uses rl.question to wait for user input. A switch statement then directs the program flow to the appropriate function. SNIPPET (app.js - Main Menu):
+            function displayMenu() {
+              console.log('\n===== Employee Management System =====');
+              // ... console.log for options ...
+              rl.question('Enter your choice: ', (choice) => {
+                switch (choice.trim()) {
+                  case '1':
+                    addEmployee();
+                    break;
+                  // ... other cases ...
+                }
+              });
+            }
+
+       iii) Add Employee Function (addEmployee): This function demonstrates handling sequential, asynchronous user input. It nests rl.question callbacks to first get the employee's name and then their ID before creating an object and adding it to the employees array. SNIPPET (app.js - Add Employee):
+            function addEmployee() {
+              rl.question('Enter employee name: ', (name) => {
+                rl.question('Enter employee ID: ', (id) => {
+                  employees.push({ name, id });
+                  console.log(`\nEmployee ${name} (ID: ${id}) added successfully.`);
+                  displayMenu(); // Return to the main menu
+                });
+              });
+            }
+
+        iv) Remove Employee Function (removeEmployee): This function demonstrates searching for and removing an item from the array. It uses findIndex to locate the employee by their ID and then splice to remove them from the collection. SNIPPET (app.js - Remove Employee):
+            function removeEmployee() {
+              rl.question('Enter employee ID to remove: ', (idToRemove) => {
+                const index = employees.findIndex(employee => employee.id === idToRemove);
+                if (index !== -1) {
+                 const removedEmployee = employees.splice(index, 1);
+                  // ... success message ...
+                } else {
+                  // ... error message ...
+                }
+                displayMenu();
+              });
+            }
+
+
+5) Learning Outcomes:
+    a) Mastered the use of the built-in Node.js readline module for interactive CLI applications.
+    b) Gained practical experience building a stateful terminal-based application.
+    c) Understood how to handle asynchronous user input using nested callbacks.
+    d) Implemented core data manipulation techniques on in-memory arrays (add, read, delete).
+    e) Learned to structure a CLI application with a persistent menu loop.
+
+6) Key Concepts:
+    a) Interactive CLI Applications
+    b) Node.js Built-in Modules (readline)
+    c) In-Memory Data Management
+    d) Asynchronous Callbacks
+    e) User Input Handling
+    f) Array Methods (push, forEach, findIndex, splice)
