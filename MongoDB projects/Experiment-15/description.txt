@@ -1,0 +1,63 @@
+E-COMMERCE PRODUCT MANAGEMENT API
+
+This project is a simple Node.js and MongoDB based application where we can manage products along with their variants. I have used Express.js for building APIs, Mongoose for MongoDB interaction, and Body-Parser for handling JSON requests.
+
+API FUNCTIONALITIES & VALIDATIONS
+
+1. PRODUCT SCHEMA:
+
+   1 name → String, required for identifying the product
+   2 price → Number, stores cost of product
+   3 category → String, used for categorizing products (like Electronics, Clothing, etc.)
+   4 variants → Array of objects (color, size, stock)
+
+2. VARIANT SCHEMA:
+
+   1 color → String (example: "Red", "Blue")
+   2 size → String (example: "M", "L", "XL")
+   3 stock → Number, shows available quantity
+
+API ROUTES
+
+a) GET /products
+ Fetches all products from the database.
+
+b) GET /products/category/:category
+ Retrieves products by a given category.
+ Example: /products/category/clothing
+
+c) GET /products/by-color/:color
+ Fetches products where any variant matches a specific color.
+
+d) GET /products/by-size/:size
+ Fetches products where any variant matches a specific size.
+
+e) POST /products
+ Adds a new product with its variants.
+ Example Body:
+  {
+  "name": "T-Shirt",
+  "price": 499,
+  "category": "Clothing",
+  "variants": [
+  { "color": "Black", "size": "M", "stock": 20 },
+  { "color": "White", "size": "L", "stock": 15 }
+  ]
+  }
+
+f) PUT /products/:id/variant
+Updates stock of a particular variant (color + size combination).
+
+g) DELETE /products/:id/variant
+Removes a particular variant (example: delete Blue, L size).
+
+h) DELETE /products/:id
+Deletes the entire product.
+
+LEARNING OUTCOMES
+
+1. Learnt how to design schemas with nested documents in MongoDB.
+2. Understood how to create RESTful APIs using Express.js.
+3. Practiced CRUD operations (Create, Read, Update, Delete) on a product database.
+4. Gained experience in handling variants of products separately.
+5. Got familiar with Mongoose queries like find, updateOne, pull, and findByIdAndDelete.

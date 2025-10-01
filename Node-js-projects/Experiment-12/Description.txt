@@ -61,18 +61,18 @@ Console logs provide details about when a seat is locked, confirmed, or when a l
 
 --->PRACTICAL USAGE FLOW
 
-Start the server and check /seats → all seats should show "available".
-Choose a seat and send a POST request to /lock/:seatId → seat gets locked for 1 minute.
-Within 1 minute, send a POST request to /confirm/:seatId → seat becomes "booked".
-If no confirmation is made within 1 minute, seat automatically resets to "available".
-Booked seats cannot be locked or booked again.
+1.Start the server and check /seats → all seats should show "available".
+2.Choose a seat and send a POST request to /lock/:seatId → seat gets locked for 1 minute.
+3.Within 1 minute, send a POST request to /confirm/:seatId → seat becomes "booked".
+4.If no confirmation is made within 1 minute, seat automatically resets to "available".
+5.Booked seats cannot be locked or booked again.
 
 --->LEARNING OUTCOMES
 
-Learned how to implement a real-time seat booking system using Express.
-Understood the concept of temporary locks and how to manage timeouts in APIs.
-Gained experience in handling multiple seat states (available, locked, booked).
-Practiced using POST requests with route parameters for locking and confirming seats.
-Learned howto handle error cases clearly (seat not found, already booked, lock expired).
-Improved logical thinking by designing a 1-minute lock mechanism that mimics real-world ticket booking apps.
-Understood the importance of server-side validation to prevent invalid bookings.
+1.Learned how to implement a real-time seat booking system using Express.
+2.Understood the concept of temporary locks and how to manage timeouts in APIs.
+3.Gained experience in handling multiple seat states (available, locked, booked).
+4.Practiced using POST requests with route parameters for locking and confirming seats.
+5.Learned howto handle error cases clearly (seat not found, already booked, lock expired).
+6.Improved logical thinking by designing a 1-minute lock mechanism that mimics real-world ticket booking apps.
+7.Understood the importance of server-side validation to prevent invalid bookings.
