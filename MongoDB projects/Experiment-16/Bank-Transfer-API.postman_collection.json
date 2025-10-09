@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "Bank Transfer API",
+    "description": "Account Transfer System with Balance Validation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Create User Account - Alice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\",\n  \"accountNumber\": \"ACC001\",\n  \"balance\": 1000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "Create User Account - Bob",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bob Smith\",\n  \"email\": \"bob@example.com\",\n  \"accountNumber\": \"ACC002\",\n  \"balance\": 500\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "Create User Account - Charlie",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Charlie Brown\",\n  \"email\": \"charlie@example.com\",\n  \"accountNumber\": \"ACC003\",\n  \"balance\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "Successful Transfer (Alice → Bob)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": \"ACC001\",\n  \"toAccount\": \"ACC002\",\n  \"amount\": 200\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "Failed Transfer - Insufficient Balance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": \"ACC001\",\n  \"toAccount\": \"ACC002\",\n  \"amount\": 2000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "Failed Transfer - Account Not Found",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": \"INVALID\",\n  \"toAccount\": \"ACC002\",\n  \"amount\": 100\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "Failed Transfer - Same Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": \"ACC001\",\n  \"toAccount\": \"ACC001\",\n  \"amount\": 100\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "Failed Transfer - Invalid Amount",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": \"ACC001\",\n  \"toAccount\": \"ACC002\",\n  \"amount\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "Get Account Balance - Alice",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/balance/ACC001",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "balance", "ACC001"]
+        }
+      }
+    },
+    {
+      "name": "Get Account Balance - Bob",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/balance/ACC002",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "balance", "ACC002"]
+        }
+      }
+    }
+  ]
+}
