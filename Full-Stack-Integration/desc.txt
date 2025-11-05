@@ -1,0 +1,62 @@
+EXPERIMENT 3: Real-Time Chat Application Using WebSocket Connections (Socket.io)
+===============================================================================
+
+Title
+Develop Real-Time Chat Application Using WebSocket Connections (Socket.io)
+
+Objective
+Learn how to build a real-time chat application using WebSocket connections with the help of Socket.io in a Node.js backend and React frontend. This task helps you understand how to establish two-way communication between server and clients, manage connected users, and update the UI instantly as messages are exchanged.
+
+Task Description
+- Set up a Node.js server using Express and integrate Socket.io to handle real-time WebSocket connections.
+- Build a React frontend that connects to the backend Socket.io server.
+- Implement a simple chat UI where users can enter their name and send messages to a shared room.
+- Display the list of messages in real time to all connected users without refreshing the page.
+- Handle basic events like connecting, disconnecting, and broadcasting messages to all clients.
+- Test the app by opening it in multiple browser windows and confirming that messages are instantly visible to all participants.
+
+What Was Done
+- Created an Express server and integrated Socket.io for WebSocket support.
+- Established socket connections and managed user sessions.
+- Implemented message broadcasting so all connected clients receive new messages instantly.
+- Built a React chat interface with input fields for name and message.
+- Used Socket.io-client in React to connect to the backend and listen for real-time updates.
+- Handled user connection and disconnection events to update the UI.
+- Verified real-time functionality by testing in multiple browser tabs.
+
+Expected Output
+- A chat application where users can send and receive messages in real time.
+- Messages appear instantly for all connected users.
+- No page refresh required for updates.
+
+-------------------------------------------------------------------------------
+
+EXPERIMENT 1: Connecting React Frontend to Express API Using Axios
+==================================================================
+
+Title
+Connecting React Frontend to Express API Using Axios
+
+Objective
+Learn how to connect a React frontend application to a backend Express.js API using Axios to fetch data. This task helps you understand how to integrate frontend and backend parts of a full stack application and handle HTTP requests in React.
+
+Task Description
+- Create a simple Express.js API that returns a list of products (each with a name and price).
+- Build a React frontend application with a component that uses Axios to fetch the product data from the Express API when the component mounts.
+- Display the list of products in a user-friendly layout, showing their name and price.
+- Ensure you handle loading states and possible errors when fetching data.
+- Test the connection by running both the frontend and backend locally and verifying that the React app correctly displays data fetched from the Express API.
+
+What Was Done
+- Developed an Express backend with a `/api/products` endpoint serving a static array of products.
+- Enabled CORS to allow frontend-backend communication.
+- Built a React frontend using Axios to fetch product data from the backend API.
+- Implemented loading and error states for robust user experience.
+- Rendered product cards with name, price, and a "Buy Now" button in a responsive grid layout.
+- Styled the UI for clarity and usability.
+- Verified integration by running both servers locally and confirming that product data is fetched and displayed correctly in the React app.
+
+Expected Output
+- A product listing page in React that displays products fetched from the Express API.
+- Proper handling of loading and error states.
+- Data is shown dynamically after successful API fetch.
