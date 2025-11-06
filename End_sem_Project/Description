@@ -1,0 +1,189 @@
+AI-POWERED CHATBOT USING MERN STACK AND GEMINI API
+1. PROJECT OVERVIEW
+
+--->Project Title:
+AI-Powered Chatbot Integration into MERN Application using Gemini API
+
+--->Objective:
+To design and integrate an AI chatbot into a MERN stack web application that uses Google Gemini API for intelligent conversation handling, real-time streaming, and secure user interaction.
+
+--->Goal:
+Build a complete full-stack application capable of real-time AI communication with persistent conversation history, authentication, and context management.
+
+2. PROBLEM STATEMENT
+
+Traditional chatbots often rely on predefined responses, lacking adaptability and real-time intelligence.
+The challenge is to create a dynamic chatbot that:
+⦁	Connects to Gemini API for advanced AI interactions.
+⦁	Maintains session context and memory per user.
+⦁	Provides streamed responses for a natural chat flow.
+⦁	Persists all data in a MongoDB database securely.
+
+3. SYSTEM ARCHITECTURE
+
+The project follows a MERN architecture:
+
+⦁	MongoDB: Stores user sessions, chat history, and metadata.
+⦁	Express (Node.js): Acts as a backend server and API layer connecting React and Gemini API.
+⦁	React: Provides the interactive front-end chat
+⦁	Node.js: Handles server-side operations, authentication, and message routing.
+⦁	Communication between React frontend and Node backend happens via REST APIs and SSE (Server-Sent Events) for real-time token streaming.
+
+4. FOLDER STRUCTURE
+End_sem_Project/
+│
+├── chatbot_mehak_chat/
+│   ├── node_modules/
+│   ├── src/
+│   ├── .env
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   ├── server.js
+│
+├── gemini-react-app/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── package-lock.json
+│
+├── screenshots/
+│   ├── image.png
+│   ├── Screenshot 2025-11-01.png
+│   ├── Screenshot 2025-11-02.png
+│   ├── Screenshot 2025-11-03.png
+│   ├── Screenshot 2025-11-04.png
+│
+└── Description/
+
+
+Explanation:
+
+⦁	chatbot_mehak_chat: Backend (Node + Express) with Gemini API logic and MongoDB connection.
+⦁	gemini-react-app: Frontend built with React for chat UI and real-time updates.
+⦁	screenshots: Contains demonstration and testing images.
+⦁	Description: Documentation and project notes.
+⦁	.env: Environment variables (Gemini API key, Mongo URI, JWT secret).
+
+5. FUNCTIONAL COMPONENTS
+A. Provider Abstraction
+⦁	Uses a service layer for Gemini API with flexible request/response handling.
+⦁	Configurable parameters (model, temperature, timeout).
+⦁	Easily extensible to other AI providers in future.
+
+B. Context & Memory
+
+⦁	Session-based history management using MongoDB.
+⦁	Auto-summarization for long conversations to save tokens.
+⦁	Functions for clearing, resetting, or attaching system prompts dynamically.
+
+C. Streaming APIs
+
+⦁	/chat endpoint created with Server-Sent Events (SSE).
+⦁	Streams partial responses token by token for smoother experience.
+⦁	Heartbeat and backpressure handling for connection stability.
+
+D. React Chat UI
+
+⦁	Built with React.js and includes:
+⦁	Typing indicators and live streaming messages.
+⦁	Retry and error handling options.
+⦁	Timestamps and grouped message display.
+⦁	Context controls (clear/summarize/reset).
+
+E. Persistence
+
+⦁	MongoDB collections for users, sessions, and chat logs.
+⦁	TTL (Time-To-Live) for inactive sessions.
+⦁	Option to export or download full conversations.
+
+F. Safety & Guardrails
+
+⦁	Prompt injection filtering and input sanitization.
+⦁	Rate limiting per user session.
+⦁	Environment-based secret management.
+
+G. Authentication & Security
+
+⦁	JWT-based user authentication.
+⦁	CORS and CSRF protection enabled.
+⦁	Secure cookie-based sessions or headers.
+
+H. Observability & Monitoring
+
+⦁	Metrics for latency, API errors, and token usage.
+⦁	Logging with correlation IDs for debugging.
+⦁	Cost tracking for per-user AI usage.
+
+I. Testing
+
+⦁	Mock Gemini provider for local testing.
+⦁	Unit and integration tests for backend routes.
+⦁	E2E (End-to-End) testing of conversation flow and persistence.
+
+J. DevOps & Deployment
+
+⦁	Docker Compose setup for easy deployment.
+⦁	Environment-driven configurations for dev/test/prod.
+⦁	Seed scripts for demo sessions and testing data.
+
+6. TECHNOLOGIES USED
+⦁	Component	         Technology
+⦁	Frontend	         React.js
+⦁	Backend	         Node.js, Express.js
+⦁	Database	         MongoDB
+⦁	AI Provider	         Google Gemini API
+⦁	Authentication	 JWT
+⦁	Communication	SSE      / WebSocket
+⦁	Containerization	 Docker
+⦁	Testing Tools	Jest,    Postman
+⦁	Version Control	  Git, GitHub
+⦁	Environment Management	.env
+⦁	
+7. CSS & FRONTEND DESIGN OVERVIEW
+
+⦁	ELEMENT: Chat Container (Main UI Box)
+⦁	background-color: #ffffff; — clean chat box appearance
+⦁	border-radius: 10px; — smooth curved edges
+⦁	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); — raised effect
+⦁	ELEMENT: Message Bubbles
+⦁	User messages: light blue (#d0e7ff)
+⦁	Bot messages: light gray (#f1f1f1)
+⦁	padding: 10px; and margin: 5px; for spacing
+⦁	ELEMENT: Input Field
+⦁	Full-width input box with rounded corners
+⦁	border: 1px solid #ccc; for separation
+⦁	padding: 12px; font-size: 16px; for usability
+⦁	ELEMENT: Send Button
+⦁	background-color: #4a90e2; color: white; — visually prominent
+⦁	border-radius: 5px; — consistent design
+⦁	cursor: pointer; — clear interactivity
+
+8. WORKFLOW
+
+⦁	User opens the React chat interface.
+⦁	Sends a mssage → React sends it to backend /chat endpoint.
+⦁	Node.js Express server processes and forwards it to Gemini API.
+⦁	Gemini API responds with tokens (streamed in real time).
+⦁	Backend streams response using SSE/WebSocket to frontend.
+⦁	MongoDB saves full conversation and session details.
+⦁	User can clear chat, summarize context, or continue chatting.
+
+9. RESULTS
+
+⦁	Successfully implemented real-time streaming chat with Gemini API.
+⦁	Achieved secure JWT-based authentication.
+⦁	Persistent session memory and summarization working correctly.
+⦁	Optimized token usage and latency performance.
+⦁	Developed a clean, responsive React UI for chat interactions.
+
+10. LEARNING OUTCOMES
+
+⦁	Learned full-stack development using MERN (MongoDB, Express, React, Node).
+⦁	Understood integration of AI APIs (Gemini API) for real-time NLP.
+⦁	Implemented streaming APIs (SSE/WebSocket) in Node.js.
+⦁	Gained experience in JWT authentication and secure routing.
+⦁	Learned to store, manage, and summarize contextual chat history in MongoDB.
+⦁	Understood Docker deployment, environment variables, and project configuration.
+⦁	Enhanced UI/UX skills using React.js and CSS design principles.
+⦁	Improved debugging, testing, and project organization skil
