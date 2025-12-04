@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 
-export default function PromptsSidebar({ onSelect, onCreate, onEdit, onDelete }) {
+export default function PromptsSidebar({ onSelect, onCreate, onEdit, onDelete, isAdmin }) {
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -43,8 +43,28 @@ export default function PromptsSidebar({ onSelect, onCreate, onEdit, onDelete })
                 <div className="prompt-meta">{p.isGlobal ? "Global" : "Personal"}</div>
               </button>
               <div className="prompt-actions">
-                <button className="icon-btn" title="Edit" onClick={() => onEdit?.(p, refresh)}>✏️</button>
-                <button className="icon-btn" title="Delete" onClick={async () => { await api.deletePrompt(p._id); refresh(); onDelete?.(); }}>🗑️</button>
+                {(!p.isGlobal || isAdmin) && (
+                  <>
+                    <button
+                      className="icon-btn"
+                      title="Edit"
+                      onClick={() => onEdit?.(p, refresh)}
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className="icon-btn"
+                      title="Delete"
+                      onClick={async () => {
+                        await api.deletePrompt(p._id);
+                        refresh();
+                        onDelete?.();
+                      }}
+                    >
+                      🗑️
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ))
@@ -53,5 +73,3 @@ export default function PromptsSidebar({ onSelect, onCreate, onEdit, onDelete })
     </aside>
   );
 }
-
-

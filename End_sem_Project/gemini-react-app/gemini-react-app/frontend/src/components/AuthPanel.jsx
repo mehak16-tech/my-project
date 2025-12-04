@@ -30,13 +30,25 @@ export default function AuthPanel({ onAuthed }) {
       const payload = mode === "register"
         ? { name: trimmedName, email: trimmedEmail, password: trimmedPassword }
         : { email: trimmedEmail, password: trimmedPassword };
-      const res = mode === "register" ? await api.register(payload) : await api.login(payload);
+        const res =
+        mode === "register"
+          ? await api.register(payload)
+          : await api.login(payload);
+      
       if (res?.token) {
+        // Save token
         storeToken(res.token);
+      
+        // Save user info (email, name, id) so Chat can know who you are
+        if (res.user) {
+          localStorage.setItem("user", JSON.stringify(res.user));
+        }
+      
         onAuthed(res);
       } else {
         throw new Error("No token returned");
       }
+      
     } catch (e) {
       setError(e?.message || "Auth failed");
     } finally {

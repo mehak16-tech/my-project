@@ -9,7 +9,7 @@ function extractVariables(template) {
   return Array.from(vars);
 }
 
-export default function PromptFillModal({ open, prompt, onClose, onApplySystem, onApplyUser, onSaved }) {
+export default function PromptFillModal({ open, prompt, onClose, onApplySystem, onApplyUser, onSaved, isAdmin }) {
   const [values, setValues] = useState({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -58,7 +58,7 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
         </div>
         <div className="modal-body">
           {!prompt?._id && (
-            <PromptEditor busy={busy} error={error} onSave={handleSave} initial={prompt} />
+            <PromptEditor busy={busy} error={error} onSave={handleSave} initial={prompt} isAdmin={isAdmin} />
           )}
           {prompt?._id && (
             <div className="vars-grid">
@@ -68,7 +68,11 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
                 variables.map((k) => (
                   <div key={k} className="var-row">
                     <label>{k}</label>
-                    <input className="input" value={values[k] || ""} onChange={(e) => setValues((v) => ({ ...v, [k]: e.target.value }))} />
+                    <input
+                      className="input"
+                      value={values[k] || ""}
+                      onChange={(e) => setValues((v) => ({ ...v, [k]: e.target.value }))}
+                    />
                   </div>
                 ))
               )}
@@ -78,8 +82,12 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
         </div>
         {prompt?._id ? (
           <div className="modal-actions">
-            <button className="send-btn" disabled={busy} onClick={() => onApplySystem?.(fillTemplate())}>Use as system</button>
-            <button className="send-btn" disabled={busy} onClick={() => onApplyUser?.(fillTemplate())}>Use as message</button>
+            <button className="send-btn" disabled={busy} onClick={() => onApplySystem?.(fillTemplate())}>
+              Use as system
+            </button>
+            <button className="send-btn" disabled={busy} onClick={() => onApplyUser?.(fillTemplate())}>
+              Use as message
+            </button>
           </div>
         ) : null}
       </div>
@@ -87,7 +95,7 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
   );
 }
 
-function PromptEditor({ initial, onSave, busy, error }) {
+function PromptEditor({ initial, onSave, busy, error, isAdmin }) {
   const [name, setName] = useState(initial?.name || "");
   const [content, setContent] = useState(initial?.content || "");
   const [vars, setVars] = useState((initial?.variables || []).join(", "));
@@ -102,19 +110,51 @@ function PromptEditor({ initial, onSave, busy, error }) {
 
   return (
     <div className="editor-grid">
-      <input className="input" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-      <textarea className="textarea" placeholder="Template content with {{variables}}" value={content} onChange={(e) => setContent(e.target.value)} />
-      <input className="input" placeholder="Variables (comma-separated)" value={vars} onChange={(e) => setVars(e.target.value)} />
-      <label className="checkbox-row">
-        <input type="checkbox" checked={isGlobal} onChange={(e) => setIsGlobal(e.target.checked)} />
-        Make global
-      </label>
+      <input
+        className="input"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <textarea
+        className="textarea"
+        placeholder="Template content with {{variables}}"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <input
+        className="input"
+        placeholder="Variables (comma-separated)"
+        value={vars}
+        onChange={(e) => setVars(e.target.value)}
+      />
+      {isAdmin && (
+        <label className="checkbox-row">
+          <input
+            type="checkbox"
+            checked={isGlobal}
+            onChange={(e) => setIsGlobal(e.target.checked)}
+          />
+          Make global
+        </label>
+      )}
       {error && <div className="error-banner">{error}</div>}
       <div className="modal-actions">
-        <button className="send-btn" disabled={busy} onClick={() => onSave({ name, content, variables: parseVars(vars), isGlobal })}>Save</button>
+        <button
+          className="send-btn"
+          disabled={busy}
+          onClick={() =>
+            onSave({
+              name,
+              content,
+              variables: parseVars(vars),
+              isGlobal: isAdmin ? isGlobal : false,
+            })
+          }
+        >
+          Save
+        </button>
       </div>
     </div>
   );
 }
-
-
