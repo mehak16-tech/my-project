@@ -5,7 +5,7 @@
   overflow: hidden;
   display: grid;
   place-items: center;
-  padding: 0;
+  padding: 16px;
   box-sizing: border-box;
 }
 
@@ -35,7 +35,6 @@
   box-shadow: 0 22px 60px rgba(15, 23, 42, 0.25);
   overflow: hidden;
   z-index: 1; /* keep this low, modal-overlay will be higher */
-  margin: 0 auto;  /* center the card */
 }
 
 .chat-header {
@@ -107,10 +106,16 @@
   grid-template-columns: 280px 1fr;
   gap: 0;
   height: 100%;
+  width: 100%; /* Ensure full width */
+  max-width: 100vw; /* Prevent overflow */
 }
 
-.chat-main { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
-
+.chat-main { 
+  display: grid; 
+  grid-template-rows: minmax(0, 1fr) auto; 
+  min-height: 0;
+  width: 100%; /* Ensure full width of its container */
+}
 /* Prompts sidebar */
 .prompts-sidebar {
   border-right: 1px solid #e5e7eb;
@@ -300,10 +305,10 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  min-height: 0;
   background: #ffffff;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* When auth panel is shown, center everything */
@@ -424,45 +429,96 @@
   color: #ffb0b0;
 }
 
-/* Responsive tweaks */
 @media (max-width: 640px) {
-  .chat-root { padding: 0; }
-  .chat-card { height: 100%; width: 100%; border-radius: 0; }
-  .chat-list { padding: 16px 12px; gap: 10px; }
-  .avatar { width: 32px; height: 32px; border-radius: 10px; }
-  .bubble { max-width: 88%; font-size: 14px; padding: 10px 12px; }
-  .input { height: 46px; }
-  .send-btn { height: 46px; }
+  .chat-card {
+    height: 100dvh;
+    width: 100vw;
+    border-radius: 0;
+    margin: 0;
+    left: auto;
+    transform: none;
+  }
+  .chat-list { 
+    padding: 12px 8px; /* Even less padding on very small screens */
+    gap: 8px;
+  }
+  .avatar { 
+    width: 28px; 
+    height: 28px; 
+    border-radius: 8px; 
+  }
+  .bubble {
+    max-width: min(50ch, 95%); /* Maximum width on small screens */
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  .input { 
+    height: 44px; 
+  }
+  .send-btn { 
+    height: 44px; 
+  }
+  .chat-bubble-row {
+    gap: 6px; /* Reduce gap on small screens */
+  }
 }
 
 /* Auth styles (reuse chat inputs/buttons) */
 /* Auth styles (reuse chat inputs/buttons) */
 .auth-root {
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
-  flex: 1;
+  background: rgba(15, 15, 15, 0.95); /* Solid dark background instead of blur */
+  z-index: 1000;
 }
 
 .auth-card {
   width: min(460px, 90%);
   border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(20,20,20,0.6);
-  backdrop-filter: blur(10px) saturate(1.2);
+  background: rgba(20,20,20,0.95); /* More opaque background */
+  backdrop-filter: none; /* Remove blur effect */
   border-radius: 16px;
   padding: 32px 28px;
   box-shadow: 0 16px 48px rgba(0,0,0,0.45);
   margin: 0 auto;
 }
 
-.auth-title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 800;
+@media (max-width: 900px) {
+  .chat-body { grid-template-columns: 1fr; }
+  .prompts-sidebar { display: none; }
 }
 
+/* Add Gemini Chat heading */
+.auth-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-brand {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.08em;
+}
+
+.auth-tagline {
+  font-size: 14px;
+  color: #9aa0a6;
+  margin: 0;
+}
+.auth-title {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff; /* Add this line - make the title white */
+}
 .auth-sub {
   margin: 2px 0 16px 0;
   color: #9aa0a6;

@@ -59,6 +59,12 @@ export default function AuthPanel({ onAuthed }) {
   return (
     <div className="auth-root">
       <div className="auth-card">
+        {/* Add Gemini Chat header */}
+        <div className="auth-header">
+          <h1 className="auth-brand">Gemini Chat</h1>
+          <p className="auth-tagline">AI-powered conversations</p>
+        </div>
+        
         <h2 className="auth-title">{mode === "login" ? "Welcome back" : "Create account"}</h2>
         <p className="auth-sub">Sign {mode === "login" ? "in" : "up"} to start chatting</p>
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -95,14 +101,24 @@ export default function AuthPanel({ onAuthed }) {
         </form>
         <div className="auth-switch">
           {mode === "login" ? (
-            <button className="link" onClick={() => setMode("register")} disabled={loading}>Need an account? Register</button>
+            <button className="link" onClick={() => {
+              setMode("register");
+              setName("");
+              setEmail("");
+              setPassword("");
+              setError("");
+            }} disabled={loading}>Need an account? Register</button>
           ) : (
-            <button className="link" onClick={() => setMode("login")} disabled={loading}>Already have an account? Login</button>
+            <button className="link" onClick={() => {
+              setMode("login");
+              setName("");
+              setEmail("");
+              setPassword("");
+              setError("");
+            }} disabled={loading}>Already have an account? Login</button>
           )}
         </div>
       </div>
     </div>
   );
 }
-
-

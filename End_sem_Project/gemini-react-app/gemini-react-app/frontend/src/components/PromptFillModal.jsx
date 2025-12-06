@@ -19,6 +19,7 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
     return v;
   }, [prompt]);
 
+
   if (!open) return null;
 
   function fillTemplate() {
@@ -35,8 +36,8 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
     setBusy(true);
     setError("");
     try {
-      if (prompt?._id) {
-        await api.updatePrompt(prompt._id, newPrompt);
+      if (newPrompt._id) {
+        await api.updatePrompt(newPrompt._id, newPrompt);
       } else {
         await api.createPrompt(newPrompt);
       }
@@ -57,13 +58,18 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
           <button className="icon-btn" onClick={onClose}>✖</button>
         </div>
         <div className="modal-body">
+          {/* Debug info */}
+          <div style={{background: '#f0f0f0', padding: '8px', marginBottom: '16px', fontSize: '12px', border: '1px solid #ccc'}}>
+            DEBUG: Modal open, prompt ID: {prompt?._id || 'none'}, variables count: {variables.length}
+          </div>
+
           {!prompt?._id && (
             <PromptEditor busy={busy} error={error} onSave={handleSave} initial={prompt} isAdmin={isAdmin} />
           )}
           {prompt?._id && (
             <div className="vars-grid">
               {variables.length === 0 ? (
-                <div className="muted">No variables</div>
+                <div className="muted" style={{color: 'red', fontWeight: 'bold'}}>No variables found</div>
               ) : (
                 variables.map((k) => (
                   <div key={k} className="var-row">
@@ -80,7 +86,7 @@ export default function PromptFillModal({ open, prompt, onClose, onApplySystem, 
           )}
           {error && <div className="error-banner">{error}</div>}
         </div>
-        {prompt?._id ? (
+        {prompt?._id && !editMode ? (
           <div className="modal-actions">
             <button className="send-btn" disabled={busy} onClick={() => onApplySystem?.(fillTemplate())}>
               Use as system
